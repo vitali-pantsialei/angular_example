@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="myApp" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
+    <script src="myApp.js"></script>
+    <title>Repos</title>
+</head>
+<body ng-controller="myCtrl">
+    Search: <input ng-model="query" />
+    <select ng-model="orderProp">
+        <option value="false">asc</option>
+        <option value="true">desc</option>
+    </select>
+    Limit: <input ng-model="limit" />
+    <ul>
+        <li ng-repeat="repo in repos | filter: query | orderBy:'full_name': orderProp | limitTo: limit">
+            <a href="{{repo.full_name}}"></a>
+            <div>Login: {{repo.owner['login']}}</div>
+            <div>Id: {{repo.owner['id']}}</div>
+            <img src="{{repo.owner['avatar_url']}}" />
+            <div>Description: {{repo.description}}</div>
+        </li>
+    </ul>
+</body>
+</html>
