@@ -4,10 +4,16 @@
 <head>
     <meta charset="utf-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-resource.js"></script>
     <script src="myApp.js"></script>
     <title>Repos</title>
 </head>
 <body ng-controller="myCtrl">
+    Maximum repo size : <input ng-model="max_size" />
+    Minimum number of forks : <input ng-model="min_forks" />
+    Minimum number of stars : <input ng-model="min_stars" />
+    <input type="button" ng-click="getRepoFunc()" value="Search" />
+    <br />
     Search: <input ng-model="query" />
     <select ng-model="orderProp">
         <option value="false">asc</option>
@@ -15,12 +21,13 @@
     </select>
     Limit: <input ng-model="limit" />
     <ul>
-        <li ng-repeat="repo in repos | filter: query | orderBy:'full_name': orderProp | limitTo: limit">
+        <li ng-repeat="repo in repos.items | filter: query | orderBy:'full_name': orderProp | limitTo: limit">
             <a href="{{repo.full_name}}"></a>
             <div>Login: {{repo.owner['login']}}</div>
             <div>Id: {{repo.owner['id']}}</div>
             <img src="{{repo.owner['avatar_url']}}" />
             <div>Description: {{repo.description}}</div>
+            <div>Language: {{repo.language}}</div>
         </li>
     </ul>
 </body>
