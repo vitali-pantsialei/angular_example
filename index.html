@@ -27,7 +27,9 @@
             <div>Id: {{repo.owner['id']}}</div>
             <img src="{{repo.owner['avatar_url']}}" />
             <div>Description: {{repo.description}}</div>
-            <div>Language: {{repo.language}}</div>
+            <div ng-repeat="lang in repo.lang">
+                {{lang.value}}, 
+            </div>
         </li>
     </ul>
 </body>
